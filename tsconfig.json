@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2020",                  
+    "module": "esnext",           
+    "experimentalDecorators": true,  
+    "emitDecoratorMetadata": true,  
+    "strict": true,                 
+    "moduleResolution": "node",      
+    "esModuleInterop": true,        
+    "skipLibCheck": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+
+  },
+  "include": [
+    "src/**/*"                      
+  ],
+  "exclude": [
+    "node_modules"  
+  ],               
+  "files": [],
+  "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.web.json" }]
+}
