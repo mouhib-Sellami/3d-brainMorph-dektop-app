@@ -1,6 +1,7 @@
 import { HashRouter as Router } from "react-router-dom";
 import AppRoutes from './routes'
-import './sass/app.scss';
+import "./sass/app.scss";
+import './sass/app.scss/';
 
 function App(): JSX.Element {
 

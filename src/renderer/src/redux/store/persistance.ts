@@ -4,6 +4,8 @@ import storage from 'redux-persist/lib/storage';
 import authReducer from "../slices/authSlice";
 import errorReducer from "../slices/errorSlice";
 import sessionReducer from "../slices/sessionSlice";
+import permissionReducer from "../slices/permissionSlice";
+import roleReducer from "../slices/roleSlice";
 
 const rootPersistConfig = {
     key: 'root',
@@ -16,7 +18,7 @@ const userPersistConfig = {
     key: 'user',
     storage: storage,
     keyPrefix: 'redux-',
-    whitelist: ['isAuthenticated', 'user', 'permissions', 'organization'],
+    whitelist: ['isAuthenticated', 'user', 'permissions'],
 };
 
 const errorHandlerPersistConfig = {
@@ -33,11 +35,27 @@ const sessionPersistConfig = {
     whitelist: ['isAlive'],
 };
 
+const PermissionsPersistConfig = {
+    key: 'permissions',
+    storage: storage,
+    keyPrefix: 'redux-',
+    whitelist: ['permissions'],
+};
+
+const RolesPersistConfig = {
+    key: 'Roles',
+    storage: storage,
+    keyPrefix: 'redux-',
+    whitelist: ['roles'],
+};
+
 
 const rootReducer = combineReducers({
     errorHandler: persistReducer(errorHandlerPersistConfig, errorReducer),
     auth: persistReducer(userPersistConfig, authReducer),
     session: persistReducer(sessionPersistConfig, sessionReducer),
+    permissions: persistReducer(PermissionsPersistConfig, permissionReducer),
+    roles: persistReducer(RolesPersistConfig, roleReducer),
 
 })
 

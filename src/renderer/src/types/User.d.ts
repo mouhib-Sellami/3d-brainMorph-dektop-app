@@ -9,4 +9,5 @@ interface User {
 	last_name: string,
 	password: string,
 	is_active?: boolean,
+	role: Role
 }

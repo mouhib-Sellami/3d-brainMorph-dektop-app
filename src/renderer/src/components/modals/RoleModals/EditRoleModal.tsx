@@ -1,12 +1,10 @@
-import useAppPermissions from "@/hooks/useAppPermissions";
-import useAuth from "@/hooks/useAuth";
 import { onError } from "@/redux/slices/errorSlice";
-import { createOrgRoles, updateOrgRole } from "@/redux/slices/orgRoleSlice";
-import { getAppPermissions } from "@/redux/slices/permissionSlice";
 import { dispatch } from "@/redux/store";
-import { Role } from "@/types/Role";
-import { Button, Group, Modal, MultiSelect, Select, TextInput, Title } from "@mantine/core";
+import { Button, Group, Modal, MultiSelect, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import useAppPermissions from "@renderer/hooks/useAppPermissions";
+import { getAppPermissions } from "@renderer/redux/slices/permissionSlice";
+import { updateRole } from "@renderer/redux/slices/roleSlice";
 import React from "react";
 
 
@@ -17,7 +15,6 @@ export interface EditRoleModalProps extends BaseModalProps {
 
 const EditRoleModal: React.FC<EditRoleModalProps> = (props) => {
     const { permissions } = useAppPermissions();
-    const { organization } = useAuth();
 
     const permissionsOptions = React.useMemo(() => {
         return permissions.flatMap(elm => ({ value: elm.id ? elm.id?.toString() : "0", label: elm.label }))
@@ -32,15 +29,15 @@ const EditRoleModal: React.FC<EditRoleModalProps> = (props) => {
     }, [])
 
     const initialValues = React.useMemo(() => {
-        if (organization && props.role)
+        if (props.role)
             return {
                 id: props.role.id,
-                organization: organization.id,
                 name: props.role.name,
                 slug: props.role.slug,
                 permissions: props.role.permissions.map(elm => elm.id?.toString())
             }
-    }, [organization, props.role])
+        return {}
+    }, [props.role])
 
     const form = useForm({
         mode: 'controlled',
@@ -53,8 +50,8 @@ const EditRoleModal: React.FC<EditRoleModalProps> = (props) => {
     });
 
     const onSubmit = React.useCallback(async (values) => {
-        const res = await dispatch(updateOrgRole(values))
-        if (res?.type == "roles/updateOrgRole/rejected") {
+        const res = await dispatch(updateRole(values))
+        if (res.meta.requestStatus == "rejected") {
             setTimeout(() => dispatch(onError({
                 content: "Cannot update role , try again later! ",
                 level: "WARNING",

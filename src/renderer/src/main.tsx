@@ -9,10 +9,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { SessionProvider } from './contexts/SessionContext';
 import { Provider as ReduxProvider } from 'react-redux';
 import { persistor, store } from './redux/store';
+import theme from './components/layout/AppTheme';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <MantineProvider stylesTransform={emotionTransform}>
+    <MantineProvider stylesTransform={emotionTransform} theme={theme}>
       <MantineEmotionProvider>
         <Notifications />
         <ModalsProvider>

@@ -2,7 +2,7 @@ import useAppPermissions from "@/hooks/useAppPermissions";
 import useAuth from "@/hooks/useAuth";
 import useProjectComponents from "@/hooks/useprojectComponents";
 import { onError } from "@/redux/slices/errorSlice";
-import { createOrgRoles } from "@/redux/slices/orgRoleSlice";
+import { createOrgRoles } from "@/redux/slices/RoleSlice";
 import { getAppPermissions } from "@/redux/slices/permissionSlice";
 import { deleteComponent, getProjectComponent, updateComponent } from "@/redux/slices/projectComponentSlice";
 import { dispatch } from "@/redux/store";

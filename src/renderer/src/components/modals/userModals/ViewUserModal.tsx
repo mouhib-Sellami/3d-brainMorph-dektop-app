@@ -1,7 +1,7 @@
 import useAuth from "@/hooks/useAuth";
 import useOrgRole from "@/hooks/useOrgRole";
 import { onError } from "@/redux/slices/errorSlice";
-import { getOrgRoles } from "@/redux/slices/orgRoleSlice";
+import { getOrgRoles } from "@/redux/slices/RoleSlice";
 import { createUser, updateUser } from "@/redux/slices/userSlice";
 import { dispatch } from "@/redux/store";
 import { OrgMember } from "@/types/User";

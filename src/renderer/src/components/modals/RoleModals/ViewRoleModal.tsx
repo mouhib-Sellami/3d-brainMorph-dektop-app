@@ -1,14 +1,9 @@
-import useAppPermissions from "@/hooks/useAppPermissions";
-import useAuth from "@/hooks/useAuth";
-import { onError } from "@/redux/slices/errorSlice";
-import { createOrgRoles } from "@/redux/slices/orgRoleSlice";
-import { getAppPermissions } from "@/redux/slices/permissionSlice";
 import { dispatch } from "@/redux/store";
-import { Role } from "@/types/Role";
-import { Button, Group, Modal, MultiSelect, Select, TextInput, Title } from "@mantine/core";
+import { Modal, MultiSelect, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import useAppPermissions from "@renderer/hooks/useAppPermissions";
+import { getAppPermissions } from "@renderer/redux/slices/permissionSlice";
 import React from "react";
-
 
 export interface ViewRoleModalProps extends BaseModalProps {
     role: Role
@@ -16,7 +11,6 @@ export interface ViewRoleModalProps extends BaseModalProps {
 
 const ViewRoleModal: React.FC<ViewRoleModalProps> = (props) => {
     const { permissions } = useAppPermissions();
-    const { organization } = useAuth();
 
     const permissionsOptions = React.useMemo(() => {
         return permissions.flatMap(elm => ({ value: elm.id ? elm.id?.toString() : "0", label: elm.label }))
@@ -31,14 +25,14 @@ const ViewRoleModal: React.FC<ViewRoleModalProps> = (props) => {
     }, [])
 
     const initialValues = React.useMemo(() => {
-        if (organization && props.role)
+        if (props.role)
             return {
-                organization: organization.id,
                 name: props.role.name,
                 slug: props.role.slug,
                 permissions: props.role.permissions.map(elm => elm.id?.toString())
             }
-    }, [organization, props.role])
+        return {}
+    }, [ props.role])
 
     const form = useForm({
         mode: 'controlled',

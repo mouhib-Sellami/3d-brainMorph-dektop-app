@@ -1,4 +1,5 @@
 import { Organization } from "../Organization";
+import { User } from "../User";
 
 type AuthState = {
     user: User | null;

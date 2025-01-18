@@ -22,7 +22,7 @@ const reduxLogger = createLogger({
   },
 })
 
-if (import.meta.env.PROD !== 'production')
+if (import.meta.env.PROD)
   middlewares.push(reduxLogger);
 
 export const store = configureStore({

@@ -16,5 +16,6 @@ export const PATH_APP = {
     landing: path(ROOTS_APP, '/'),
     general: {
         dashboard: path(ROOTS_APP, '/dashboard'),
+        roles: path(ROOTS_APP, '/roles'),
     },
 };
