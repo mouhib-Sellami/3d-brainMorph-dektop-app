@@ -5,7 +5,10 @@ import { MantineProvider } from "@mantine/core";
 import { emotionTransform, MantineEmotionProvider } from '@mantine/emotion';
 import { Notifications } from "@mantine/notifications";
 import { ModalsProvider } from "@mantine/modals";
-import { DatabaseProvider } from '@/contexts/DataBaseContext';
+import { PersistGate } from 'redux-persist/integration/react';
+import { SessionProvider } from './contexts/SessionContext';
+import { Provider as ReduxProvider } from 'react-redux';
+import { persistor, store } from './redux/store';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -13,9 +16,15 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <MantineEmotionProvider>
         <Notifications />
         <ModalsProvider>
-          {/* <DatabaseProvider> */}
-            <App />
-          {/* </DatabaseProvider> */}
+          <ReduxProvider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <SessionProvider>
+                {/* <DatabaseProvider> */}
+                <App />
+                {/* </DatabaseProvider> */}
+              </SessionProvider>
+            </PersistGate>
+          </ReduxProvider>
         </ModalsProvider>
       </MantineEmotionProvider>
     </MantineProvider>

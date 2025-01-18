@@ -8,12 +8,13 @@ const ROOTS_AUTH = '';
 const ROOTS_APP = '';
 
 export const PATH_AUTH = {
-    login: path(ROOTS_AUTH, '/'),
+    login: path(ROOTS_AUTH, '/login'),
 }
 
 export const PATH_APP = {
     root: ROOTS_APP,
+    landing: path(ROOTS_APP, '/'),
     general: {
-        landing: path(ROOTS_APP, 'landing'),
+        dashboard: path(ROOTS_APP, '/dashboard'),
     },
 };

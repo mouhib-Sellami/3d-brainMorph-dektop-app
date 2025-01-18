@@ -2,6 +2,8 @@ import React, { lazy, Suspense } from "react";
 import CustomLoadingOverlay from "@/components/customLoading/CustomLoadingOverlay";
 import { PATH_APP, PATH_AUTH } from "./paths";
 import { useRoutes } from "react-router-dom";
+import AuthGuard from "@renderer/guards/AuthGuard";
+import GuestGuard from "@renderer/guards/GuestGuard";
 
 const Loadable = (Component: React.FC) => (props: typeof Component.propTypes) => {
 
@@ -16,15 +18,25 @@ export default function AppRoutes() {
 
     return useRoutes([
         {
-            path: PATH_APP.general.landing,
+            path: PATH_APP.landing,
             element: (
-                <Landing />
+                <LandingPage />
             )
         },
         {
             path: PATH_AUTH.login,
             element: (
-                <Landing />
+                <GuestGuard>
+                    <LoginPage />
+                </GuestGuard>
+            )
+        },
+        {
+            path: PATH_APP.general.dashboard,
+            element: (
+                <AuthGuard>
+                    <DashboardPage />
+                </AuthGuard>
             )
         },
         {
@@ -37,5 +49,7 @@ export default function AppRoutes() {
 };
 
 
-const Landing = Loadable(lazy(() => import('@/pages/landing/LandingPage')));
 const Page404 = Loadable(lazy(() => import('@/pages/errors/Page404')));
+const LoginPage = Loadable(lazy(() => import('@/pages/auth/LoginPage')));
+const DashboardPage = Loadable(lazy(() => import('@/pages/app/DashboardPage')));
+const LandingPage = Loadable(lazy(() => import('@/pages/landing/LandingPage')));
