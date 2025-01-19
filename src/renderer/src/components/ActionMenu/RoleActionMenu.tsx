@@ -12,24 +12,34 @@ const RoleActionMenu: React.FC<RoleActionMenuProps> = (props) => {
     const theme = useMantineTheme();
 
     return (
-        <Menu transitionProps={{ transition: 'pop-top-right', duration: 150 }} position={props.position} width={220} withinPortal>
+        <Menu transitionProps={{ transition: 'pop-top-right', duration: 150 }}
+            position={props.position}
+            width={220}
+            withinPortal
+
+        >
             <Menu.Target>
                 <ActionIcon>
                     <IconDots size={16} />
                 </ActionIcon>
             </Menu.Target>
 
-            <Menu.Dropdown>
+            <Menu.Dropdown bg={"darkGray"} style={{
+                borderColor: theme.colors.primary[0]
+            }}>
                 <Menu.Item
-                    leftSection={<IconRefresh size={16} color={theme.colors.blue[6]} stroke={1.5} />}
+                    c={"white"}
+                    leftSection={<IconRefresh size={16} color={theme.colors.primary[6]} stroke={1.5} />}
                     onClick={() => props.reload()}
                 >
                     Reload
                 </Menu.Item>
                 <PermissionGuard permission="can_create_role">
                     <Menu.Item
-                        leftSection={<IconUserPlus size={16} color={theme.colors.blue[6]} stroke={1.5} />}
+                        leftSection={<IconUserPlus size={16} color={theme.colors.primary[6]} stroke={1.5} />}
                         onClick={() => { props.createRole() }}
+                        c={"white"}
+                        
                     >
                         Add new Role
                     </Menu.Item>

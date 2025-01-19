@@ -54,7 +54,14 @@ export default function AppRoutes() {
                             <RolePage />
                         </PermissionGuard>
                     ),
-                    index: true
+                },
+                {
+                    path: PATH_APP.general.users,
+                    element: (
+                        <PermissionGuard permission="can_view_user">
+                            <UserPage />
+                        </PermissionGuard>
+                    ),
                 }
             ]
         },
@@ -72,4 +79,5 @@ const Page404 = Loadable(lazy(() => import('@/pages/errors/Page404')));
 const LoginPage = Loadable(lazy(() => import('@/pages/auth/LoginPage')));
 const DashboardPage = Loadable(lazy(() => import('@/pages/app/DashboardPage')));
 const LandingPage = Loadable(lazy(() => import('@/pages/landing/LandingPage')));
-const RolePage = Loadable(lazy(() => import('@/pages/app/roles/RolePage')));
+const RolePage = Loadable(lazy(() => import('@/pages/app/roles/RolesPage')));
+const UserPage = Loadable(lazy(() => import('@/pages/app/users/UsersPage')));

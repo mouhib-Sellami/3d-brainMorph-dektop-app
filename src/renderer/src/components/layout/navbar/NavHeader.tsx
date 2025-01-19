@@ -7,7 +7,7 @@ import { IconChevronRight, IconLogout } from "@tabler/icons-react";
 import useAuth from "@renderer/hooks/useAuth";
 import { dispatch } from "@renderer/redux/store";
 import { logout } from "@renderer/redux/slices/authSlice";
-
+import avatarImage from "@renderer/assets/avatar.svg"
 export interface BreadCrumbDisplay {
     item: string,
     idx: number
@@ -59,10 +59,10 @@ const NavHeader: React.FC = ({ }) => {
                     ))}
                 </Flex>
                 <Group >
-                    <Menu withArrow >
+                    <Menu transitionProps={{ transition: 'pop-top-right', duration: 150 }} position={"bottom"} width={220} withinPortal>
                         <Menu.Target >
                             <UserButton
-                                image="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
+                                image={avatarImage}
                                 name={user?.username || ""}
                                 role={user?.role.name || "User"}
 

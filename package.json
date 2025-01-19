@@ -44,7 +44,7 @@
     "leva": "^0.9.35",
     "localforage": "^1.10.0",
     "lottie-web": "^5.12.2",
-    "mantine-datatable": "^7.15.1",
+    "mantine-datatable": "^7.12.4",
     "react-lottie": "^1.2.10",
     "react-redux": "^9.2.0",
     "react-router": "^6.26.1",

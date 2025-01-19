@@ -8,7 +8,7 @@ const Page404: React.FC = () => {
         <Container>
             <Center>
                 404 not found
-                <Link to={PATH_APP.general.landing}>Go Back</Link>
+                <Link to={PATH_APP.general.dashboard}>Go Back</Link>
             </Center>
         </Container>
     )

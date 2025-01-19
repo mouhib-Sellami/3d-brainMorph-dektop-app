@@ -1,6 +1,7 @@
 import { colorsTuple, createTheme, rem } from '@mantine/core';
 
 const theme = createTheme({
+    
     breakpoints: {
         xxs: "10em",
         xs: '30em',
@@ -95,22 +96,21 @@ const theme = createTheme({
             "#953533",
             "#832a2a"
         ],
-        darkGray: colorsTuple("#292929"),
-        secondary: colorsTuple("#E6C1B8"),
-        primary: colorsTuple("#29487F"),
-        dashboardBg: colorsTuple("#F9FAFD"),
-        linkColor: colorsTuple("#A5A5A9"),
-        activeLinkColor: colorsTuple("#E6C1B8"),
-        chartPassColor: colorsTuple("#05BF44"),
-        chartFailColor: colorsTuple("#FF1D28"),
-        dataTableHeader: colorsTuple("#FAF2F0"),
+        darkGray: colorsTuple("#212A2B"),
+        secondary: colorsTuple("#344346"),
+        primary: colorsTuple("#FE4A23"),
+        dashboardBg: colorsTuple("#1A2222"),
+        navBard: colorsTuple('#344346'),
+        linkColor: colorsTuple("#F9FBFB"),
+        activeLinkColor: colorsTuple("#FE4A23"),
     },
+
     primaryColor: "primary",
     fontFamily: "inter",
     primaryShade: 9,
     defaultRadius: 8,
     fontSmoothing: true,
-    white: "#fff",
+    white: "#F9FBFB",
     fontSizes: {
 
     },
@@ -130,11 +130,13 @@ const theme = createTheme({
             styles: {
                 label: {
                     fontSize: 14,
-                    color: "var(--mantine-color-gray-9)",
+                    color: "#F9FBFB",
                     marginBottom: 8
                 },
                 input: {
-                    borderColor: "var(--mantine-color-gray-2)",
+                    borderColor: "#FE4A23",
+                    background: "#344346",
+                    color: "#F9FBFB",
                 },
                 root: {
                     marginBottom: 16
@@ -145,14 +147,16 @@ const theme = createTheme({
             styles: {
                 label: {
                     fontSize: 14,
-                    color: "var(--mantine-color-gray-9)",
+                    color: "#F9FBFB",
                     marginBottom: 8
                 },
                 root: {
                     marginBottom: 16
                 },
                 input: {
-                    borderColor: "var(--mantine-color-gray-2)",
+                    borderColor: "#FE4A23",
+                    background: "#344346",
+                    color: "#F9FBFB",
                 }
             }
         },
@@ -160,14 +164,16 @@ const theme = createTheme({
             styles: {
                 label: {
                     fontSize: 14,
-                    color: "var(--mantine-color-gray-9)",
+                    color: "#F9FBFB",
                     marginBottom: 8
                 },
                 root: {
                     marginBottom: 16
                 },
                 input: {
-                    borderColor: "var(--mantine-color-gray-2)",
+                    borderColor: "#FE4A23",
+                    background: "#344346",
+                    color: "#F9FBFB",
                 }
             }
         }

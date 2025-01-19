@@ -1,29 +1,25 @@
-import useAuth from "@/hooks/useAuth";
-import useOrgRole from "@/hooks/useOrgRole";
-import { onError } from "@/redux/slices/errorSlice";
-import { getOrgRoles } from "@/redux/slices/RoleSlice";
-import { createUser, updateUser } from "@/redux/slices/userSlice";
 import { dispatch } from "@/redux/store";
-import { OrgMember } from "@/types/User";
-import { Button, Group, Modal, Select, TextInput, Title } from "@mantine/core";
+import { Modal, Select, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import useRoles from "@renderer/hooks/useRoles";
+import { getRoles } from "@renderer/redux/slices/roleSlice";
+import { User } from "@renderer/types/User";
 import React from "react";
 
 
 export interface ViewUserModalProps extends BaseModalProps {
-    orgMember: OrgMember
+    user: User
 }
 
 const ViewUserModal: React.FC<ViewUserModalProps> = (props) => {
-    const { roles } = useOrgRole();
-    const { organization } = useAuth();
+    const { roles } = useRoles();
 
     const RoleOptions = React.useMemo(() => {
         return roles.flatMap(elm => ({ value: elm.id ? elm.id?.toString() : "0", label: elm.name }))
     }, [roles])
 
     const fetchRoles = React.useCallback(async () => {
-        await dispatch(getOrgRoles())
+        await dispatch(getRoles())
     }, [])
 
     React.useEffect(() => {
@@ -31,47 +27,29 @@ const ViewUserModal: React.FC<ViewUserModalProps> = (props) => {
     }, [])
 
     const initialValues = React.useMemo(() => {
-        if (organization && props.orgMember)
-            return {
-                user: {
-                    id: props.orgMember.user.id,
-                    username: props.orgMember.user.username,
-                    first_name: props.orgMember.user.first_name,
-                    last_name: props.orgMember.user.last_name,
-                    email: props.orgMember.user.email,
-
-                },
-                role: props.orgMember.role.id?.toString(),
-                organization: organization.id,
-                created_at: props.orgMember.created_at.toString()
-            }
-        if (organization)
-            return {
-                user: {
-                    username: "",
-                    first_name: "",
-                    last_name: "",
-                    email: ""
-                },
-                role: "",
-                organization: organization.id
-            }
-    }, [organization, props.orgMember])
+        return {
+            id: props.user.id,
+            username: props.user.username,
+            first_name: props.user.first_name,
+            last_name: props.user.last_name,
+            email: props.user.email,
+            role: props.user?.role?.id?.toString() || "0",
+            created_at: props.user?.created_at || ""
+        }
+    }, [])
 
     const form = useForm({
         mode: 'controlled',
         initialValues: initialValues,
         validate: {
-            user: {
-                username: (value) => (value.length == 0
-                    ? 'Username is required!' : null),
-                first_name: (value) => (value?.length == 0
-                    ? 'First name is required!' : null),
-                last_name: (value) => (value?.length == 0
-                    ? 'Last name is required!' : null),
-                email: (value) => (/^\S+@\S+$/.test(value) ? null :
-                    'Email is required!'),
-            },
+            username: (value) => (value.length == 0
+                ? 'Username is required!' : null),
+            first_name: (value) => (value?.length == 0
+                ? 'First name is required!' : null),
+            last_name: (value) => (value?.length == 0
+                ? 'Last name is required!' : null),
+            email: (value) => (/^\S+@\S+$/.test(value) ? null :
+                'Email is required!'),
             role: (value) => value == "" || value == "0" ? "Role need to be specified" : null
         },
     });
@@ -90,7 +68,7 @@ const ViewUserModal: React.FC<ViewUserModalProps> = (props) => {
                     autoFocus
                     readOnly
                     disabled={true}
-                    {...form.getInputProps('user.username')}
+                    {...form.getInputProps('username')}
                 />
                 <TextInput
 
@@ -98,7 +76,7 @@ const ViewUserModal: React.FC<ViewUserModalProps> = (props) => {
                     label="First name"
                     placeholder="john"
                     disabled={true}
-                    {...form.getInputProps('user.first_name')}
+                    {...form.getInputProps('first_name')}
                 />
                 <TextInput
 
@@ -106,7 +84,7 @@ const ViewUserModal: React.FC<ViewUserModalProps> = (props) => {
                     label="Last name"
                     placeholder="doe"
                     disabled={true}
-                    {...form.getInputProps('user.last_name')}
+                    {...form.getInputProps('last_name')}
                 />
                 <TextInput
 
@@ -114,7 +92,7 @@ const ViewUserModal: React.FC<ViewUserModalProps> = (props) => {
                     label="email"
                     disabled={true}
                     placeholder="john.doe@example.com"
-                    {...form.getInputProps('user.email')}
+                    {...form.getInputProps('email')}
                 />
                 <TextInput
 

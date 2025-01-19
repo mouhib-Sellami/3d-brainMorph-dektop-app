@@ -20,8 +20,8 @@ const AppNavLink: React.FC<AppNavLinkProps> = ({ hasLinks, active, Icon, label, 
     return (
         <Group gap={0} justify="space-between">
             <Box style={{ display: "flex", alignItems: "center" }}>
-                <ThemeIcon variant="light" size={30}>
-                    <Icon size="24" color={active ? "white" : theme.colors.linkColor[0]} />
+                <ThemeIcon variant="transparent" size={30}>
+                    <Icon size="24" color={!active ? "white" : theme.colors.primary[0]} />
                 </ThemeIcon>
                 <Box ml="8">{label}</Box>
             </Box>

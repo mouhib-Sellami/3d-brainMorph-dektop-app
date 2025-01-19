@@ -17,5 +17,6 @@ export const PATH_APP = {
     general: {
         dashboard: path(ROOTS_APP, '/dashboard'),
         roles: path(ROOTS_APP, '/roles'),
+        users: path(ROOTS_APP, '/users'),
     },
 };

@@ -1,4 +1,5 @@
-import { LoadingOverlay } from "@mantine/core";
+import { Box, LoadingOverlay } from "@mantine/core";
+import Logo from "../dotLottie/Logo";
 
 const CustomLoadingOverlay = () => {
     return (
@@ -6,6 +7,10 @@ const CustomLoadingOverlay = () => {
             visible
             zIndex={1000}
             overlayProps={{ radius: "sm", blur: 2 }}
+
+            loaderProps={{
+                children: <Box h={200} w={200}><Logo /></Box>
+            }}
         />
     )
 }

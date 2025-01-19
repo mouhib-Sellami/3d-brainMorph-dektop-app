@@ -8,7 +8,8 @@ import React from "react";
 import Logo from "@renderer/components/dotLottie/Logo";
 
 const LoginPage: React.FC = () => {
-    const { isLoading } = useAuth()
+    const { isLoading } = useAuth();
+
     const form = useForm({
         initialValues: {
             username: '',
@@ -40,10 +41,11 @@ const LoginPage: React.FC = () => {
             style={{
                 height: "100%",
                 width: "100%",
-                backgroundColor: "#f5f3f4"
             }}
         >
-            <Box maw={400} mx="auto"
+            <Box maw={400}
+                mx="auto"
+                bg={"secondary"}
                 style={{
                     backgroundColor: "#fff",
                     borderRadius: "8px",
@@ -76,8 +78,8 @@ const LoginPage: React.FC = () => {
 
                         {...form.getInputProps('password')}
                     />
-                    <Group mt="md" justify="flex-end">
-                        <Button type="submit" color={"blue"} loading={isLoading}>Log in</Button>
+                    <Group mt="md" justify="center">
+                        <Button type="submit" color={"primary"} fullWidth loading={isLoading}>Log in</Button>
                     </Group>
 
                 </form>

@@ -19,17 +19,21 @@ const UsersActionMenu: React.FC<UsersActionMenuProps> = (props) => {
                 </ActionIcon>
             </Menu.Target>
 
-            <Menu.Dropdown>
+            <Menu.Dropdown bg={"darkGray"} style={{
+                borderColor: theme.colors.primary[0]
+            }}>
                 <Menu.Item
-                    leftSection={<IconRefresh size={16} color={theme.colors.blue[6]} stroke={1.5} />}
+                    leftSection={<IconRefresh size={16} color={theme.colors.primary[6]} stroke={1.5} />}
                     onClick={() => props.reload()}
+                    c={"white"}
                 >
                     Reload
                 </Menu.Item>
                 <PermissionGuard permission="can_create_user">
                     <Menu.Item
-                        leftSection={<IconUserPlus size={16} color={theme.colors.blue[6]} stroke={1.5} />}
+                        leftSection={<IconUserPlus size={16} color={theme.colors.primary[6]} stroke={1.5} />}
                         onClick={() => { props.createUser() }}
+                        c={"white"}
                     >
                         Add new Member
                     </Menu.Item>

@@ -19,7 +19,7 @@ export const navLinks: NavItem[] = [
     {
         label: "Users",
         icon: IconUsers,
-        link: PATH_APP.general.dashboard,
+        link: PATH_APP.general.users,
         name: "Users",
         isVisible: true,
     },

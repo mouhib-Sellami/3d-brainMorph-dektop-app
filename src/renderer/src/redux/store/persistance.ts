@@ -6,6 +6,7 @@ import errorReducer from "../slices/errorSlice";
 import sessionReducer from "../slices/sessionSlice";
 import permissionReducer from "../slices/permissionSlice";
 import roleReducer from "../slices/roleSlice";
+import userReducer from "../slices/userSlice";
 
 const rootPersistConfig = {
     key: 'root',
@@ -49,6 +50,12 @@ const RolesPersistConfig = {
     whitelist: ['roles'],
 };
 
+const usersPersistConfig = {
+    key: 'users',
+    storage: storage,
+    keyPrefix: 'redux-',
+    whitelist: ['users'],
+};
 
 const rootReducer = combineReducers({
     errorHandler: persistReducer(errorHandlerPersistConfig, errorReducer),
@@ -56,7 +63,7 @@ const rootReducer = combineReducers({
     session: persistReducer(sessionPersistConfig, sessionReducer),
     permissions: persistReducer(PermissionsPersistConfig, permissionReducer),
     roles: persistReducer(RolesPersistConfig, roleReducer),
-
+    users: persistReducer(usersPersistConfig, userReducer),
 })
 
 export { rootPersistConfig, rootReducer };

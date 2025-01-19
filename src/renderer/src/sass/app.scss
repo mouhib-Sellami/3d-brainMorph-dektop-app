@@ -10,6 +10,8 @@
 @use '@mantine/dates/styles.css' as *;
 @use '@mantine/notifications/styles.css' as *;
 @use '@mantine/core/styles.layer.css' as *;
+@use 'mantine-datatable/styles.layer.css' as *;
+@layer mantine, mantine-datatable;
 
 @font-face {
     font-family: "inter";

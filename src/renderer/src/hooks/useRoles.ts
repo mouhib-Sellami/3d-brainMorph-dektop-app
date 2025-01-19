@@ -1,10 +1,10 @@
 import { RootState, useSelector } from "../redux/store";
 
 
-const useRole = () => {
-    const useRole = useSelector(
+const useRoles = () => {
+    const useRoles = useSelector(
         (state: RootState) => state.roles
     )
-    return useRole;
+    return useRoles;
 };
-export default useRole;
+export default useRoles;

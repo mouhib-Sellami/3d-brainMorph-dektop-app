@@ -13,7 +13,7 @@ import theme from './components/layout/AppTheme';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <MantineProvider stylesTransform={emotionTransform} theme={theme}>
+    <MantineProvider stylesTransform={emotionTransform} theme={theme} defaultColorScheme="dark">
       <MantineEmotionProvider>
         <Notifications />
         <ModalsProvider>
