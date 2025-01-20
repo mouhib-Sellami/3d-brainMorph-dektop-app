@@ -69,7 +69,7 @@ const UserDataTable: React.FC<AppDataTableProps<User>> = ({ records, isLoading, 
                 content: "Cannot delete user",
                 level: "ERROR",
                 render: "NOTIFICATION",
-                type: "delete roles"
+                type: "delete user"
             })), 500)
         }
         onChange?.()

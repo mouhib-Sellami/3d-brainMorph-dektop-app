@@ -7,6 +7,7 @@ import sessionReducer from "../slices/sessionSlice";
 import permissionReducer from "../slices/permissionSlice";
 import roleReducer from "../slices/roleSlice";
 import userReducer from "../slices/userSlice";
+import patientReducer from "../slices/patientSlice";
 
 const rootPersistConfig = {
     key: 'root',
@@ -50,7 +51,14 @@ const RolesPersistConfig = {
     whitelist: ['roles'],
 };
 
-const usersPersistConfig = {
+const UsersPersistConfig = {
+    key: 'users',
+    storage: storage,
+    keyPrefix: 'redux-',
+    whitelist: ['users'],
+};
+
+const PatientsPersistConfig = {
     key: 'users',
     storage: storage,
     keyPrefix: 'redux-',
@@ -63,7 +71,8 @@ const rootReducer = combineReducers({
     session: persistReducer(sessionPersistConfig, sessionReducer),
     permissions: persistReducer(PermissionsPersistConfig, permissionReducer),
     roles: persistReducer(RolesPersistConfig, roleReducer),
-    users: persistReducer(usersPersistConfig, userReducer),
+    users: persistReducer(UsersPersistConfig, userReducer),
+    patients: persistReducer(PatientsPersistConfig, patientReducer),
 })
 
 export { rootPersistConfig, rootReducer };

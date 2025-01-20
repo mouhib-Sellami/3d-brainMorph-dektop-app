@@ -62,6 +62,14 @@ export default function AppRoutes() {
                             <UserPage />
                         </PermissionGuard>
                     ),
+                },
+                {
+                    path: PATH_APP.general.patients,
+                    element: (
+                        <PermissionGuard permission="can_view_patient">
+                            <PatientPage />
+                        </PermissionGuard>
+                    ),
                 }
             ]
         },
@@ -81,3 +89,4 @@ const DashboardPage = Loadable(lazy(() => import('@/pages/app/DashboardPage')));
 const LandingPage = Loadable(lazy(() => import('@/pages/landing/LandingPage')));
 const RolePage = Loadable(lazy(() => import('@/pages/app/roles/RolesPage')));
 const UserPage = Loadable(lazy(() => import('@/pages/app/users/UsersPage')));
+const PatientPage = Loadable(lazy(() => import('@/pages/app/patients/PatientPage')));

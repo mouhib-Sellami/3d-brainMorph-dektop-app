@@ -33,7 +33,7 @@ export const navLinks: NavItem[] = [
     {
         label: "Patients",
         icon: IconHospital,
-        link: PATH_APP.general.dashboard,
+        link: PATH_APP.general.patients,
         name: "Patients",
         isVisible: true,
     },
