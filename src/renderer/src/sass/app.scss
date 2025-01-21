@@ -11,6 +11,8 @@
 @use '@mantine/notifications/styles.css' as *;
 @use '@mantine/core/styles.layer.css' as *;
 @use 'mantine-datatable/styles.layer.css' as *;
+@use '@mantine/dropzone/styles.css' as *;
+
 @layer mantine, mantine-datatable;
 
 @font-face {
@@ -67,4 +69,9 @@ h6 {
         color: var(--mantine-color-gray-2);
         font-style: italic;
     }
+}
+
+canvas {
+    width: 75px;
+    height: 75px;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { DataTableColumn } from "mantine-datatable";
-import { ActionIcon, Center, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Badge, Center, useMantineTheme } from "@mantine/core";
 import { DataTableActions } from "@renderer/components/app-datatable/types";
 import { Patient } from "@renderer/types/Patient";
 
@@ -42,10 +42,23 @@ const PatientDataTableConfig = (props: DataTableActions<Patient>) => {
                 accessor: 'id', title: "#", width: '5%', textAlign: 'center',
             },
             {
-                accessor: 'first_name', title: "First name", textAlign: 'center', width: '20%',
+                accessor: 'first_name', title: "First name", textAlign: 'center', width: '10%',
             },
             {
-                accessor: 'last_name', title: "Last name", textAlign: 'center', width: '20%',
+                accessor: 'last_name', title: "Last name", textAlign: 'center', width: '10%',
+            },
+            {
+                accessor: 'folder_name', title: "Folder name", textAlign: 'center', width: '20%',
+            },
+            {
+                accessor: 'has_generated', title: "Generation", textAlign: 'center', width: '10%',
+                render: (record: any) => {
+                    return (
+                        <Badge color={record.is_generated ? "green" : "red"}>
+                            {record.is_generated ? "Generated" : "Not generated"}
+                        </Badge>
+                    )
+                }
             },
 
         ]

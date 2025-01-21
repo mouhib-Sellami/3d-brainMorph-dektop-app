@@ -7,10 +7,13 @@ import DataTableConfig from "@renderer/config/DataTableConfig";
 import { Box } from "@mantine/core";
 import CustomDataTable from "@renderer/components/app-datatable/CustomDataTable";
 import { dispatch } from "@renderer/redux/store";
-import { deleteRole } from "@renderer/redux/slices/roleSlice";
 import { onError } from "@renderer/redux/slices/errorSlice";
 import PatientDataTableConfig from "./PatientDataTableConfig";
 import { Patient } from "@renderer/types/Patient";
+import { deletePatient, updateSelectedPatient } from "@renderer/redux/slices/patientSlice";
+import EditPatientModal from "@renderer/components/modals/patientModals/EditPatientModal";
+import { useNavigate } from "react-router";
+import { PATH_APP } from "@renderer/routes/paths";
 
 
 const PatientDataTable: React.FC<AppDataTableProps<Patient>> = ({ records, isLoading, count, onChange }) => {
@@ -20,7 +23,7 @@ const PatientDataTable: React.FC<AppDataTableProps<Patient>> = ({ records, isLoa
     const [selectedPatient, setSelectedPatient] = React.useState<Patient | null>(null);
     const [RECORDS, setRECORDS] = React.useState(records.slice(0, DataTableConfig.MAX_PAGE_SIZE));
     const { displayDeleteConfirmModal } = useDeleteConfirmModal()
-
+    const navigation = useNavigate()
     React.useEffect(() => {
         const from = (page - 1) * DataTableConfig.MAX_PAGE_SIZE;
         const to = from + DataTableConfig.MAX_PAGE_SIZE;
@@ -31,18 +34,18 @@ const PatientDataTable: React.FC<AppDataTableProps<Patient>> = ({ records, isLoa
         actions: [
             {
                 icon: IconEye,
-                action(record) {
-                    setSelectedPatient(record)
-                    setAction("VIEW")
-                    open()
+                action(record: Patient) {
+                    setSelectedPatient(record);
+                    dispatch(updateSelectedPatient(record));
+                    navigation(PATH_APP.general.patientDetails);
                 },
             },
             {
                 icon: IconPencil,
                 action(record) {
-                    setSelectedPatient(record)
-                    setAction("UPDATE")
-                    open()
+                    setSelectedPatient(record);
+                    setAction("UPDATE");
+                    open();
                 },
             },
             {
@@ -55,13 +58,13 @@ const PatientDataTable: React.FC<AppDataTableProps<Patient>> = ({ records, isLoa
                         },
                         () => {
                             console.log("cancel");
-                        })
+                        });
                 },
             }
         ]
     });
     const delete_ = React.useCallback(async (id: number) => {
-        const res = await dispatch(deleteRole(id))
+        const res = await dispatch(deletePatient(id))
         if (res.meta.requestStatus == "rejected") {
             setTimeout(() => dispatch(onError({
                 content: "Cannot delete patient , try again later.",
@@ -82,8 +85,7 @@ const PatientDataTable: React.FC<AppDataTableProps<Patient>> = ({ records, isLoa
     return (
         <Box p={0} m={0}>
             <CustomDataTable isLoading={isLoading} columns={COLUMNS} pageSize={DataTableConfig.MAX_PAGE_SIZE} total={count} records={RECORDS} onPageChanges={(p) => { setPage(p) }} />
-            {/* {opened && action == "UPDATE" && selectedRole ? <EditRoleModal role={selectedRole} isVisible={opened} onUpdate={() => { closeModal(); onChange?.() }} onClose={closeModal} /> : null}
-            {opened && action == "VIEW" && selectedRole ? <ViewRoleModal role={selectedRole} isVisible={opened} onClose={closeModal} /> : null} */}
+            {opened && action == "UPDATE" && selectedPatient ? <EditPatientModal patient={selectedPatient} isVisible={opened} onUpdate={() => { closeModal(); onChange?.() }} onClose={closeModal} /> : null}
         </Box>
     )
 }

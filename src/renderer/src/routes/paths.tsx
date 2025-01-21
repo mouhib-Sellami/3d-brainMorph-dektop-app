@@ -19,5 +19,6 @@ export const PATH_APP = {
         roles: path(ROOTS_APP, '/roles'),
         users: path(ROOTS_APP, '/users'),
         patients: path(ROOTS_APP, '/patients'),
+        patientDetails: path(ROOTS_APP, '/patient-details'),
     },
 };

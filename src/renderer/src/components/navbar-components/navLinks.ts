@@ -15,6 +15,7 @@ export const navLinks: NavItem[] = [
         link: PATH_APP.general.dashboard,
         name: "Dashboard",
         isVisible: true,
+        initiallyOpened: true
     },
     {
         label: "Users",
@@ -36,6 +37,13 @@ export const navLinks: NavItem[] = [
         link: PATH_APP.general.patients,
         name: "Patients",
         isVisible: true,
+        links:[
+            {
+                label:"Patient details",
+                isVisible:false,
+                link:PATH_APP.general.patientDetails,
+            }
+        ]
     },
     {
         label: "Settings",

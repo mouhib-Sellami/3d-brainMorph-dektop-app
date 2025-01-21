@@ -7,6 +7,7 @@ import usePatients from "@renderer/hooks/usePatients";
 import { getPatients } from "@renderer/redux/slices/patientSlice";
 import PatientActionMenu from "@renderer/components/ActionMenu/PatientActionMenu";
 import PatientDataTable from "@renderer/components/dataTables/patient-dataTable/PatientDataTable";
+import AddPatientModal from "@renderer/components/modals/patientModals/AddPatientModal";
 
 const PatientPage: React.FC = () => {
     const { patients, isLoading } = usePatients()
@@ -33,7 +34,7 @@ const PatientPage: React.FC = () => {
             <ContentWrapper>
                 <PatientDataTable count={patients.length} isLoading={isLoading} records={patients} onChange={fetchPatients} />
             </ContentWrapper>
-            {/* {openAddModal ? <AddRoleModal isVisible={openAddModal} onAdd={() => { fetchRoles(); setOpenAddModal(false) }} onClose={() => setOpenAddModal(false)} /> : null} */}
+            {openAddModal ? <AddPatientModal isVisible={openAddModal} onAdd={() => { fetchPatients(); setOpenAddModal(false) }} onClose={() => setOpenAddModal(false)} /> : null}
         </Box>
     )
 }

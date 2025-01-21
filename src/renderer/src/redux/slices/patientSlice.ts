@@ -8,6 +8,7 @@ const initialState: PatientState = {
     isError: false,
     isLoading: false,
     message: '',
+    selectedPatient: null
 };
 
 const patientSlice = createSlice({
@@ -19,6 +20,10 @@ const patientSlice = createSlice({
             state.isLoading = false;
             state.isError = false;
             state.message = '';
+            state.selectedPatient = null
+        },
+        updateSelectedPatient: (state: PatientState, action) => {
+            state.selectedPatient = action.payload
         },
     },
     extraReducers: (builder) => {
@@ -81,6 +86,21 @@ const patientSlice = createSlice({
                 state.isError = true;
                 state.message = '';
             })
+            .addCase(uploadPatient.pending, (state) => {
+                state.isLoading = true;
+                state.message = '';
+            })
+            .addCase(uploadPatient.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.message = '';
+                state.selectedPatient = action.payload
+            })
+            .addCase(uploadPatient.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = '';
+            })
     }
 })
 
@@ -120,6 +140,7 @@ export const deletePatient = createAsyncThunk('patients/deletePatient', async (d
         return thunkAPI.rejectWithValue(error);
     }
 });
+
 export const updatePatient = createAsyncThunk('patients/updatePatient', async (data: Patient, thunkAPI) => {
     try {
         const response = await patientServices.updatePatient(data);
@@ -132,6 +153,18 @@ export const updatePatient = createAsyncThunk('patients/updatePatient', async (d
     }
 });
 
-export const { resetPatient } = patientSlice.actions;
+export const uploadPatient = createAsyncThunk('patients/uploadPatient', async (values: { data: FormData,id:number }, thunkAPI) => {
+    try {
+        const response = await patientServices.uploadPatient(values);
+        return response;
+    } catch (error: any) {
+        if (error?.response?.data) {
+            return thunkAPI.rejectWithValue(error?.response?.data);
+        }
+        return thunkAPI.rejectWithValue(error);
+    }
+});
+
+export const { resetPatient, updateSelectedPatient } = patientSlice.actions;
 
 export default patientSlice.reducer;

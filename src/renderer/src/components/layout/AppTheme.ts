@@ -143,6 +143,45 @@ const theme = createTheme({
                 }
             }
         },
+        'DateInput': {
+            styles: {
+                label: {
+                    fontSize: 14,
+                    color: "#F9FBFB",
+                    marginBottom: 8
+                },
+                input: {
+                    borderColor: "#FE4A23",
+                    background: "#344346",
+                    color: "#F9FBFB",
+                },
+                root: {
+                    marginBottom: 16
+                }
+            }
+        },
+        'NumberInput': {
+            styles: {
+                label: {
+                    fontSize: 14,
+                    color: "#F9FBFB",
+                    marginBottom: 8
+                },
+                input: {
+                    borderColor: "#FE4A23",
+                    background: "#344346",
+                    color: "#F9FBFB",
+                },
+                root: {
+                    marginBottom: 16
+                }
+            }
+        },
+        'Title':{
+            styles:{
+                color:"#FE4A23"
+            }
+        },
         'PasswordInput': {
             styles: {
                 label: {

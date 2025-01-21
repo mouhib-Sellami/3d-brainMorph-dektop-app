@@ -62,7 +62,7 @@ const PatientsPersistConfig = {
     key: 'users',
     storage: storage,
     keyPrefix: 'redux-',
-    whitelist: ['users'],
+    whitelist: ['patients', 'selectedPatient'],
 };
 
 const rootReducer = combineReducers({

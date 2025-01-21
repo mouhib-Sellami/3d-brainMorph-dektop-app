@@ -20,6 +20,11 @@ const createPatient = async (role: Patient) => {
     return data
 };
 
+const uploadPatient = async (values: { data: FormData, id: number }) => {
+    const { data } = await axiosInstance.postForm(API_PREFIX + `${values.id}/upload/`, values.data);
+    return data
+};
+
 const updatePatient = async (role: Patient) => {
     const { data } = await axiosInstance({
         method: "PUT",
@@ -41,7 +46,8 @@ const patientServices = {
     getPatients,
     createPatient,
     deletePatient,
-    updatePatient
+    updatePatient,
+    uploadPatient
 };
 
 export default patientServices;
