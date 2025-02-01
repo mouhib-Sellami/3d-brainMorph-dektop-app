@@ -11,11 +11,19 @@ const getPatients = async () => {
     return data
 };
 
-const createPatient = async (role: Patient) => {
+const getPatient = async (id: number) => {
+    const { data } = await axiosInstance({
+        method: "GET",
+        url: API_PREFIX + `${id}/`,
+    });
+    return data
+};
+
+const createPatient = async (patient: Patient) => {
     const { data } = await axiosInstance({
         method: "POST",
         url: API_PREFIX,
-        data: role
+        data: patient
     });
     return data
 };
@@ -25,11 +33,19 @@ const uploadPatient = async (values: { data: FormData, id: number }) => {
     return data
 };
 
-const updatePatient = async (role: Patient) => {
+const updatePatient = async (patient: Patient) => {
     const { data } = await axiosInstance({
         method: "PUT",
-        url: API_PREFIX + `${role.id}/`,
-        data: role
+        url: API_PREFIX + `${patient.id}/`,
+        data: patient
+    });
+    return data
+};
+
+const startProcessPatient = async (id: number) => {
+    const { data } = await axiosInstance({
+        method: "POST",
+        url: API_PREFIX + `${id}/start-patient/`,
     });
     return data
 };
@@ -47,7 +63,9 @@ const patientServices = {
     createPatient,
     deletePatient,
     updatePatient,
-    uploadPatient
+    uploadPatient,
+    startProcessPatient,
+    getPatient
 };
 
 export default patientServices;

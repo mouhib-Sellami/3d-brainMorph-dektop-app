@@ -2,6 +2,7 @@
 interface ImportMetaEnv {
     readonly VITE_BASE_SERVER_API_URL: string;
     readonly VITE_AUTH_TOKEN: string;
+    readonly VITE_SOCKET_SERVER: string;
 }
 
 interface ImportMeta {

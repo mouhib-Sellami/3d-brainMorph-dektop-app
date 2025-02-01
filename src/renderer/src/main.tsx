@@ -10,6 +10,8 @@ import { SessionProvider } from './contexts/SessionContext';
 import { Provider as ReduxProvider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import theme from './components/layout/AppTheme';
+import { SocketProvider } from "./contexts/SocketContext";
+import { ProcessProvider } from './contexts/ProcessContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -17,15 +19,17 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <MantineEmotionProvider>
         <Notifications />
         <ModalsProvider>
-          <ReduxProvider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <SessionProvider>
-                {/* <DatabaseProvider> */}
-                <App />
-                {/* </DatabaseProvider> */}
-              </SessionProvider>
-            </PersistGate>
-          </ReduxProvider>
+          <SocketProvider>
+            <ProcessProvider>
+              <ReduxProvider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                  <SessionProvider>
+                    <App />
+                  </SessionProvider>
+                </PersistGate>
+              </ReduxProvider>
+            </ProcessProvider>
+          </SocketProvider>
         </ModalsProvider>
       </MantineEmotionProvider>
     </MantineProvider>
