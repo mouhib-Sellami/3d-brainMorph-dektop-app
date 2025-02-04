@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { ActionIcon, Button, Card, Flex, Grid, Overlay, useMantineTheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks";
 import { Patient } from "@renderer/types/Patient";
@@ -12,9 +12,6 @@ import usePatients from "@renderer/hooks/usePatients";
 import ThreeViewerCard from "../treeD/ThreeViewerCard";
 import RenderWithoutSlicerModal from "../treeD/models/RenderWithoutSlicerModal";
 import RenderWithSlicerModal from "../treeD/models/RenderWithSlicerModal";
-
-
-import LoadModal from "../treeD/LoadModal";
 
 export interface ThreeDCardWrapperProps {
     patient: Patient
@@ -126,7 +123,7 @@ const ThreeDCardWrapper: React.FC<ThreeDCardWrapperProps> = () => {
                     </Card>
                 </Grid.Col>
                 <Grid.Col span={6}>
-        
+
                 </Grid.Col>
 
             </Grid>

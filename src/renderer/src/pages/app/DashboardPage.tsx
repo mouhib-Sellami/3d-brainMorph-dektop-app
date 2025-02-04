@@ -12,6 +12,7 @@ import { dispatch } from "@renderer/redux/store";
 import { BarChart, DonutChart, FunnelChart, RadarChart, Sparkline } from '@mantine/charts';
 import CustomLoadingOverlay from "@renderer/components/customLoading/CustomLoadingOverlay";
 import TasksDataTable from "@renderer/components/dataTables/task-datatable/TasksDataTable;";
+import DashboardActionMenu from "@renderer/components/ActionMenu/DashboardActionMenu";
 
 const DashboardPage: React.FC = () => {
     const [unprocessedCount, setUnprocessedCount] = React.useState(0);
@@ -20,6 +21,10 @@ const DashboardPage: React.FC = () => {
     const { isLoading } = usePatients();
     const tasksHooks = useTasks();
     const { groupedByIsDone, getTasksChart, groupedByStatus, groupedByTaskType, getAverageExecutionTime } = useTasksGroup();
+    
+    const taskLoading = React.useMemo(() => {
+        return tasksHooks.isLoading
+    }, [tasksHooks.isLoading])
 
     const RECORDS = React.useMemo(() => {
         return [...tasksHooks.tasks].splice(0, 15)
@@ -58,20 +63,29 @@ const DashboardPage: React.FC = () => {
         fetchProcessedPatient()
     }, [])
 
+    const reload_ = React.useCallback(() => {
+        fetchTasks_()
+        fetchUnprocessedPatient()
+        fetchProcessingPatient()
+        fetchProcessedPatient()
+    }, [])
+
     return (
         <Box>
-            {isLoading || tasksHooks.isLoading && <CustomLoadingOverlay />}
+            {isLoading || taskLoading ? <CustomLoadingOverlay /> : null}
             <HeaderWrapper>
                 <Flex align={"center"} justify={"space-between"}>
                     <Title ta="left" c={"primary"}>
                         Dashboard
                     </Title>
+                    <DashboardActionMenu reload={() => reload_()} position="bottom-end" />
+
                 </Flex>
             </HeaderWrapper>
             <ContentWrapper>
                 <Grid>
                     <Grid.Col span={3}>
-                        <ChartCard title="Patient count" isLoading={isLoading} >
+                        <ChartCard title="Patient count"  >
                             <Center h={100}>
                                 <Title order={2}>
                                     {processedCount + unprocessedCount}
@@ -80,7 +94,7 @@ const DashboardPage: React.FC = () => {
                         </ChartCard>
                     </Grid.Col>
                     <Grid.Col span={3}>
-                        <ChartCard title="Processing Patient" isLoading={isLoading} >
+                        <ChartCard title="Processing Patient"  >
                             <Center h={100}>
                                 <Title order={2}>
                                     {processingCount}
@@ -89,7 +103,7 @@ const DashboardPage: React.FC = () => {
                         </ChartCard>
                     </Grid.Col>
                     <Grid.Col span={3}>
-                        <ChartCard title="Unprocessed Patient" isLoading={isLoading} >
+                        <ChartCard title="Unprocessed Patient"  >
                             <Center h={100} >
                                 <Title order={2}>
                                     {unprocessedCount}
@@ -98,7 +112,7 @@ const DashboardPage: React.FC = () => {
                         </ChartCard>
                     </Grid.Col>
                     <Grid.Col span={3}>
-                        <ChartCard title="Processed Patient" isLoading={isLoading} >
+                        <ChartCard title="Processed Patient"  >
                             <Center h={100} >
                                 <Title order={2}>
                                     {processedCount}
@@ -110,7 +124,7 @@ const DashboardPage: React.FC = () => {
                 </Grid>
                 <Grid mt={"md"}>
                     <Grid.Col span={8}>
-                        <ChartCard title="Job series" isLoading={isLoading} >
+                        <ChartCard title="Job series"  >
                             <Center>
                                 <Sparkline
                                     w={"100%"}
@@ -125,7 +139,7 @@ const DashboardPage: React.FC = () => {
                         </ChartCard>
                     </Grid.Col>
                     <Grid.Col span={4}>
-                        <ChartCard title="AVG. excution time" isLoading={isLoading} >
+                        <ChartCard title="AVG. excution time"  >
                             <Center h={150} >
                                 <Title order={2}>
                                     {Number(getAverageExecutionTime(tasksHooks.tasks).toFixed(2))} s
@@ -136,7 +150,7 @@ const DashboardPage: React.FC = () => {
                 </Grid>
                 <Grid mt={"md"}>
                     <Grid.Col span={6}>
-                        <ChartCard title="Jobs by task" isLoading={isLoading} >
+                        <ChartCard title="Jobs by task"  >
                             <RadarChart
                                 h={300}
                                 data={groupedByTaskType(tasksHooks.tasks)}
@@ -147,7 +161,7 @@ const DashboardPage: React.FC = () => {
                         </ChartCard>
                     </Grid.Col>
                     <Grid.Col span={6}>
-                        <ChartCard title="Job by status" isLoading={isLoading} >
+                        <ChartCard title="Job by status"  >
                             <Center>
                                 <DonutChart
                                     h={300}
@@ -161,7 +175,7 @@ const DashboardPage: React.FC = () => {
                         </ChartCard>
                     </Grid.Col>
                     <Grid.Col span={6}>
-                        <ChartCard title="Runned jobs" isLoading={isLoading} >
+                        <ChartCard title="Runned jobs"  >
                             <Center>
                                 <BarChart
                                     h={300}
@@ -176,7 +190,7 @@ const DashboardPage: React.FC = () => {
                         </ChartCard>
                     </Grid.Col>
                     <Grid.Col span={6}>
-                        <ChartCard title="Finish / unfinished jobs" isLoading={isLoading} >
+                        <ChartCard title="Finish / unfinished jobs"  >
                             <Center>
                                 <Center h={300}>
                                     <FunnelChart
