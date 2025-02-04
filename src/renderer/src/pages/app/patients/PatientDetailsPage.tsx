@@ -9,8 +9,6 @@ import ThreeDCardWrapper from "@renderer/components/cards/ThreeDCardWrapper";
 
 const PatientDetailsPage: React.FC = () => {
     const { selectedPatient } = usePatients();
-    console.log(selectedPatient);
-
     return (
         <Box>
             <HeaderWrapper>

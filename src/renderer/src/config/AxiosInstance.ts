@@ -20,12 +20,7 @@ const axiosInstance = axios.create({
 export const setAuthToken = async (config: any) => {
     try {
         const token = localStorage.getItem(import.meta.env.VITE_AUTH_TOKEN || "@token");
-        console.log("token");
-        console.log(token);
-        
-        if (token) {
-            console.log("heree");
-            
+        if (token) {            
             config.headers.Authorization = `Bearer ${token}`
         } else {
             delete config.headers.Authorization;
@@ -42,9 +37,7 @@ const responseHandler = (response: AxiosResponse) => {
 
 const errorHandler = async (error: AxiosError) => {
     try {
-        const token = localStorage.getItem(import.meta.env.VITE_AUTH_TOKEN || "@token");
-        console.log(token);
-        
+        const token = localStorage.getItem(import.meta.env.VITE_AUTH_TOKEN || "@token");        
         if (error.code === AxiosError.ERR_NETWORK || error.code === AxiosError.ETIMEDOUT) {
             await store.dispatch(onError({
                 content: "Network error, check your Internet connection.",

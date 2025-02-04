@@ -43,7 +43,6 @@ const AddPatientModal: React.FC<AddPatientModalProps> = (props) => {
         const dateObj = new Date(values.birth_date);
 
         const formattedDate = dateObj.toISOString().slice(0, 10);
-        console.log(formattedDate);
 
         const res = await dispatch(createPatients({ ...values, birth_date: formattedDate }))
         if (res.meta.requestStatus == "rejected") {

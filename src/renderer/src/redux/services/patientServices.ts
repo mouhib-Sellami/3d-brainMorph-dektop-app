@@ -58,6 +58,30 @@ const deletePatient = async (id: number) => {
     return data
 };
 
+const processingPatient = async () => {
+    const { data } = await axiosInstance({
+        method: "GET",
+        url: API_PREFIX + `processing-patient`,
+    });
+    return data
+};
+
+const pendingPatient = async () => {
+    const { data } = await axiosInstance({
+        method: "GET",
+        url: API_PREFIX + `pending-patient`,
+    });
+    return data
+};
+
+const processedPatient = async () => {
+    const { data } = await axiosInstance({
+        method: "GET",
+        url: API_PREFIX + `processed-patient`,
+    });
+    return data
+};
+
 const patientServices = {
     getPatients,
     createPatient,
@@ -65,7 +89,10 @@ const patientServices = {
     updatePatient,
     uploadPatient,
     startProcessPatient,
-    getPatient
+    getPatient,
+    processingPatient,
+    pendingPatient,
+    processedPatient
 };
 
 export default patientServices;

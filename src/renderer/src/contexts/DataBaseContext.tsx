@@ -42,7 +42,6 @@ export const DatabaseProvider: FunctionComponent<PropsWithChildren> = ({
                 if (import.meta.env.DEV) {
                     return wasm
                 }
-                console.log(dbDriverPath);
                 
                 return dbDriverPath
             },

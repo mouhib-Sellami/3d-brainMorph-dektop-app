@@ -80,7 +80,6 @@ const UserDataTable: React.FC<AppDataTableProps<User>> = ({ records, isLoading, 
         setAction(null);
         setSelectedUser(null);
     }, [])
-    console.log(selectedUser);
     
     return (
         <Box p={0} m={0}>

@@ -8,6 +8,7 @@ import permissionReducer from "../slices/permissionSlice";
 import roleReducer from "../slices/roleSlice";
 import userReducer from "../slices/userSlice";
 import patientReducer from "../slices/patientSlice";
+import taskReducer from "../slices/taskSlice";
 
 const rootPersistConfig = {
     key: 'root',
@@ -65,6 +66,13 @@ const PatientsPersistConfig = {
     whitelist: ['patients', 'selectedPatient'],
 };
 
+const TasksPersistConfig = {
+    key: 'tasks',
+    storage: storage,
+    keyPrefix: 'redux-',
+    whitelist: ['tasks'],
+};
+
 const rootReducer = combineReducers({
     errorHandler: persistReducer(errorHandlerPersistConfig, errorReducer),
     auth: persistReducer(userPersistConfig, authReducer),
@@ -73,6 +81,7 @@ const rootReducer = combineReducers({
     roles: persistReducer(RolesPersistConfig, roleReducer),
     users: persistReducer(UsersPersistConfig, userReducer),
     patients: persistReducer(PatientsPersistConfig, patientReducer),
+    tasks: persistReducer(TasksPersistConfig, taskReducer),
 })
 
 export { rootPersistConfig, rootReducer };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { ActionIcon, Button, Card, Flex, Grid, Overlay, useMantineTheme } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks";
 import { Patient } from "@renderer/types/Patient";
@@ -13,9 +13,14 @@ import ThreeViewerCard from "../treeD/ThreeViewerCard";
 import RenderWithoutSlicerModal from "../treeD/models/RenderWithoutSlicerModal";
 import RenderWithSlicerModal from "../treeD/models/RenderWithSlicerModal";
 
+
+import LoadModal from "../treeD/LoadModal";
+
 export interface ThreeDCardWrapperProps {
     patient: Patient
 }
+
+
 
 const ThreeDCardWrapper: React.FC<ThreeDCardWrapperProps> = () => {
     const { selectedPatient } = usePatients()
@@ -63,19 +68,11 @@ const ThreeDCardWrapper: React.FC<ThreeDCardWrapperProps> = () => {
     useSocketSubscribe('patient_start', handlePatient)
     useSocketSubscribe('patient_complete', handlePatient)
 
-
-    console.log("PATIENT");
-    console.log(PATIENT);
-
-
     const closeModal = React.useCallback(() => {
         setSelectedPath("")
         setAction("")
         close()
     }, [])
-
-    console.log(selectedPath);
-    console.log(opened);
 
     return (
         <Card h={"100%"} pos={"relative"} color="darkGray">
@@ -129,33 +126,34 @@ const ThreeDCardWrapper: React.FC<ThreeDCardWrapperProps> = () => {
                     </Card>
                 </Grid.Col>
                 <Grid.Col span={6}>
-                    <Card bg="black" w={"100%"} h={"100%"}>
-
-                    </Card>
+        
                 </Grid.Col>
 
             </Grid>
-            {PATIENT && PATIENT.has_files && !PATIENT.is_generated && !PATIENT.is_processing &&
+            {
+                PATIENT && PATIENT.has_files && !PATIENT.is_generated && !PATIENT.is_processing &&
                 <Overlay color={theme.colors.darkGray[5]} backgroundOpacity={0.8} >
                     <Flex align={"center"} justify={"center"} h={"100%"} w={"100%"}>
                         <Button leftSection={<Icon3dCubeSphere />} onClick={startGeneration}>Generate 3D</Button>
                     </Flex>
                 </Overlay>
             }
-            {PATIENT && !PATIENT.has_files &&
+            {
+                PATIENT && !PATIENT.has_files &&
                 <Overlay color={theme.colors.darkGray[5]} backgroundOpacity={0.8} >
                     <Flex align={"center"} justify={"center"} h={"100%"} w={"100%"}>
                         <Button leftSection={<IconUpload />} onClick={() => { setAction('UPLOAD'); open() }}>Upload images</Button>
                     </Flex>
                 </Overlay>
             }
-            {PATIENT && PATIENT.is_processing &&
+            {
+                PATIENT && PATIENT.is_processing &&
                 <CustomLoadingOverlay />
             }
             {opened && PATIENT && action == "UPLOAD" && <UploadPatientImagesModal isVisible={opened} patient={PATIENT} onUpload={closeModal} onClose={closeModal} />}
             {opened && PATIENT && action != "UPLOAD" && action != "VIEW" && <RenderWithoutSlicerModal model_path={selectedPath} isVisible={opened} onClose={closeModal} />}
             {opened && PATIENT && action == "VIEW" && <RenderWithSlicerModal model_path={PATIENT.public_combined_brain} isVisible={opened} onClose={closeModal} />}
-        </Card>
+        </Card >
     )
 }
 

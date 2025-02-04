@@ -57,9 +57,7 @@ const EditUserModal: React.FC<EditUserModalProps> = (props) => {
         },
     });
 
-    const onSubmit = React.useCallback(async (values) => {
-        console.log(values);
-        
+    const onSubmit = React.useCallback(async (values) => {        
         if (props.user) {
             const res = await dispatch(updateUser({ id: props.user.id, ...values }))
             if (res?.type == "users/updateUser/rejected") {

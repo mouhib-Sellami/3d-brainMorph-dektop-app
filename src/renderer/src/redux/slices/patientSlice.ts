@@ -131,6 +131,51 @@ const patientSlice = createSlice({
                 state.isError = true;
                 state.message = '';
             })
+            .addCase(pendingPatient.pending, (state) => {
+                state.isLoading = true;
+                state.message = '';
+            })
+            .addCase(pendingPatient.fulfilled, (state) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.message = '';
+
+            })
+            .addCase(pendingPatient.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = '';
+            })
+            .addCase(processingPatient.pending, (state) => {
+                state.isLoading = true;
+                state.message = '';
+            })
+            .addCase(processingPatient.fulfilled, (state) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.message = '';
+
+            })
+            .addCase(processingPatient.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = '';
+            })
+            .addCase(processedPatient.pending, (state) => {
+                state.isLoading = true;
+                state.message = '';
+            })
+            .addCase(processedPatient.fulfilled, (state) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.message = '';
+
+            })
+            .addCase(processedPatient.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = '';
+            })
     }
 })
 
@@ -209,6 +254,41 @@ export const startPatient = createAsyncThunk('patients/startPatient', async (id:
 export const getPatient = createAsyncThunk('patients/getPatient', async (id: number, thunkAPI) => {
     try {
         const response = await patientServices.getPatient(id);
+        return response;
+    } catch (error: any) {
+        if (error?.response?.data) {
+            return thunkAPI.rejectWithValue(error?.response?.data);
+        }
+        return thunkAPI.rejectWithValue(error);
+    }
+});
+
+export const pendingPatient = createAsyncThunk('patients/pendingPatient', async (_, thunkAPI) => {
+    try {
+        const response = await patientServices.pendingPatient();
+        return response;
+    } catch (error: any) {
+        if (error?.response?.data) {
+            return thunkAPI.rejectWithValue(error?.response?.data);
+        }
+        return thunkAPI.rejectWithValue(error);
+    }
+});
+
+export const processingPatient = createAsyncThunk('patients/processingPatient', async (_, thunkAPI) => {
+    try {
+        const response = await patientServices.processingPatient();
+        return response;
+    } catch (error: any) {
+        if (error?.response?.data) {
+            return thunkAPI.rejectWithValue(error?.response?.data);
+        }
+        return thunkAPI.rejectWithValue(error);
+    }
+});
+export const processedPatient = createAsyncThunk('patients/processedPatient', async (_, thunkAPI) => {
+    try {
+        const response = await patientServices.processedPatient();
         return response;
     } catch (error: any) {
         if (error?.response?.data) {
