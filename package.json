@@ -1,6 +1,6 @@
 {
-  "name": "electron-react-boilerplate",
-  "description": "A foundation for scalable desktop apps",
+  "name": "3d-brainMorph-dektop-app",
+  "description": "",
   "keywords": [
     "electron",
     "boilerplate",
@@ -117,7 +117,6 @@
     "@tabler/icons-react": "^3.28.1",
     "@tensorflow/tfjs-backend-webgl": "^4.22.0",
     "@tensorflow/tfjs-core": "^4.22.0",
-    "@types/three": "^0.173.0",
     "@zappar/zappar": "^2.2.7",
     "@zappar/zappar-react-three-fiber": "^2.5.2",
     "axios": "^1.7.7",
