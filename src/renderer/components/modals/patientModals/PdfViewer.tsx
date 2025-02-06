@@ -68,7 +68,7 @@ const PdfViewer = (props: PdfProps) => {
     }, [src]);
 
     return (
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative" ,width:"80%"}}>
 
             <canvas ref={canvasRef} style={{ height: "100%", width: "100%" }}></canvas>
         </div>

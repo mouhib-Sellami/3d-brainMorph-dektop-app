@@ -83,6 +83,7 @@ const AddRoleModal: React.FC<AddRoleModalProps> = (props) => {
                     {...form.getInputProps('slug')}
                 />
                 <MultiSelect
+                
                     label="Permissions"
                     placeholder="Pick value"
                     data={permissionsOptions}

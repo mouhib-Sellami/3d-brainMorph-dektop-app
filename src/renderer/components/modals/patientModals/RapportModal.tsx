@@ -1,5 +1,5 @@
 
-import { ActionIcon, Button, Flex, Group, Modal, ScrollArea, Text, Title } from "@mantine/core";
+import { ActionIcon, Button, Drawer, Flex, Group, Modal, ScrollArea, Text, Title } from "@mantine/core";
 
 import React from "react";
 import PdfViewer from "./PdfViewer";
@@ -22,13 +22,12 @@ const RapportModal: React.FC<RapportModalProps> = (props) => {
     console.log(props.pdf_path);
 
     return (
-        <Modal size="xl"
+        <Drawer size="xl"
             closeOnClickOutside
             opened={props.isVisible}
             onClose={props.onClose}
-            centered
-            styles={{
-            }}
+            h={"100%"}
+           
             title={
                 <Group w={"100%"} align="center" justify="space-between">
                     <Title style={{ textAlign: "center" }} order={3}>Rapport</Title>
@@ -44,7 +43,9 @@ const RapportModal: React.FC<RapportModalProps> = (props) => {
                 </Group >
             }
         >
-        </Modal >
+            <PdfViewer currentPage={currentPage} numberOfPages={(nb: number) => { setNumPages(nb) }} src={props.pdf_path} />
+
+        </Drawer >
     )
 }
 

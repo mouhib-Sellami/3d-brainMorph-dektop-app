@@ -91,7 +91,7 @@ const AddPatientModal: React.FC<AddPatientModalProps> = (props) => {
                 />
                 <DateInput
                     withAsterisk
-                    label="Age"
+                    label="Birth date"
                     required
                     valueFormat="YYYY-MM-DD"
                     placeholder="01/01/1990"
