@@ -76,7 +76,7 @@ const ThreeDCardWrapper: React.FC<ThreeDCardWrapperProps> = () => {
     return (
         <Card h={"100%"} pos={"relative"} color="darkGray">
             <Grid h={"100%"} grow gutter="sm">
-                <Grid.Col span={6} mih={250} >
+                <Grid.Col span={6} mih={300} >
                     <Card bg="black" w={"100%"} h={"100%"} p={0} m={0}>
                         <ActionIcon variant="filled" aria-label="Settings" style={{ position: "absolute", top: 10, right: 10, zIndex: 100 }}
                             onClick={() => {
@@ -108,7 +108,7 @@ const ThreeDCardWrapper: React.FC<ThreeDCardWrapperProps> = () => {
                         {PATIENT && PATIENT.is_generated && <ThreeViewerCard model_path={PATIENT.public_combined_brain} />}
                     </Card>
                 </Grid.Col>
-                <Grid.Col span={6} mih={250}>
+                <Grid.Col span={6} mih={300}>
                     <Card bg="black" w={"100%"} h={"100%"} p={0} m={0}>
                         <ActionIcon variant="filled" aria-label="Settings" style={{ position: "absolute", top: 10, right: 10, zIndex: 100 }}
                             onClick={() => {
