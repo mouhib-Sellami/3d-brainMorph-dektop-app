@@ -22,7 +22,10 @@ const RapportModal: React.FC<RapportModalProps> = (props) => {
     console.log(props.pdf_path);
 
     return (
-        <Drawer size="xl"
+        <Drawer
+        translate="yes"
+        
+        size="xl"
             closeOnClickOutside
             opened={props.isVisible}
             onClose={props.onClose}
