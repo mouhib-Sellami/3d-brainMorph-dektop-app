@@ -39,6 +39,16 @@ const configuration: webpack.Configuration = {
         },
       },
       {
+        test: /\.pdf$/,
+        use: {
+          loader: 'file-loader',  // Or any other appropriate loader
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'assets/', // Customize as needed
+          },
+        },
+      },
+      {
         test: /\.scss$/,
         include: path.resolve(__dirname, '../src'),
 

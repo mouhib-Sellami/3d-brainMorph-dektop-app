@@ -9,4 +9,5 @@ declare module '*.mp4';
 declare module '*.zpt';
 declare module '*.glb';
 declare module '*.scss';
+declare module '*.pdf';
 

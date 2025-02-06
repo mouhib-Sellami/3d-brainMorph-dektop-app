@@ -4,6 +4,7 @@ import { Button, Group, Modal, NumberInput, Select, TextInput, Title } from "@ma
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { createPatients } from "@renderer/redux/slices/patientSlice";
+import { Patient } from "@renderer/types/Patient";
 import React from "react";
 
 export interface AddPatientModalProps extends BaseModalProps {
@@ -39,7 +40,7 @@ const AddPatientModal: React.FC<AddPatientModalProps> = (props) => {
         },
     });
 
-    const onSubmit = React.useCallback(async (values) => {
+    const onSubmit = React.useCallback(async (values: Patient) => {
         const dateObj = new Date(values.birth_date);
 
         const formattedDate = dateObj.toISOString().slice(0, 10);
@@ -65,7 +66,7 @@ const AddPatientModal: React.FC<AddPatientModalProps> = (props) => {
             onClose={props.onClose}
             centered>
             <Title style={{ textAlign: "center" }} order={3}>Add new Patient</Title>
-            <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
+            <form onSubmit={form.onSubmit((values) => onSubmit(values as Patient))}>
                 <TextInput
                     withAsterisk
                     label="First name"

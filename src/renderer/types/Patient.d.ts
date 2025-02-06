@@ -6,7 +6,7 @@ export interface Patient {
     is_generated: boolean,
     gender: "Male" | "Female",
     age: number,
-    birth_date: Date
+    birth_date: Date | string
     has_files: boolean
     is_processing: boolean
     nii_file_path: string
@@ -16,4 +16,6 @@ export interface Patient {
     public_tumor: string
     public_brain: string
     public_combined_brain: string
+    public_rapport: string
+    rapport_file_path: string
 }
