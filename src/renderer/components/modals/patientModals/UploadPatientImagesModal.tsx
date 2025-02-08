@@ -36,7 +36,11 @@ const UploadPatientImagesModal: React.FC<UploadPatientImagesModalProps> = (props
             data: formData,
             id: props.patient.id || 0
         }))
+        console.log(res);
+        
         if (res.meta.requestStatus == "fulfilled") {
+            console.log("her");
+            
             props.onUpload()
         }
 

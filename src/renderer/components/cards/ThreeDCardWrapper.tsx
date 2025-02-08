@@ -72,7 +72,8 @@ const ThreeDCardWrapper: React.FC<ThreeDCardWrapperProps> = () => {
         close()
     }, [])
     console.log(action);
-    
+    console.log(PATIENT);
+
     return (
         <Card h={"100%"} pos={"relative"} color="darkGray">
             <Grid h={"100%"} grow gutter="sm">
@@ -164,7 +165,7 @@ const ThreeDCardWrapper: React.FC<ThreeDCardWrapperProps> = () => {
                 PATIENT && PATIENT.is_processing &&
                 <CustomLoadingOverlay />
             }
-            {opened && PATIENT && action == "UPLOAD" && <UploadPatientImagesModal isVisible={opened} patient={PATIENT} onUpload={closeModal} onClose={closeModal} />}
+            {opened && !PATIENT.has_files && action == "UPLOAD" && <UploadPatientImagesModal isVisible={opened} patient={PATIENT} onUpload={closeModal} onClose={closeModal} />}
             {opened && PATIENT && action != "UPLOAD" && action != "VIEW" && <RenderWithoutSlicerModal model_path={selectedPath} isVisible={opened} onClose={closeModal} />}
             {opened && PATIENT && action == "VIEW" && <RenderWithSlicerModal model_path={PATIENT.public_combined_brain} isVisible={opened} onClose={closeModal} />}
             {opened && PATIENT && action == "AR" && <RenderARModal model_path={PATIENT.public_combined_brain} isVisible={opened} onClose={closeModal} />}
